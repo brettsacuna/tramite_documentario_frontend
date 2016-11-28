@@ -1,0 +1,103 @@
+<div class="modal-header">
+    <h3 class="modal-title"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;Nuevo documento</h3>
+</div>
+<div class="modal-body">
+	<form name="formNuevoDocumento" novalidate>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group" ng-class="{'has-error' : formNuevoDocumento.tipo_documento.$invalid && (!formNuevoDocumento.tipo_documento.$pristine || nuevo_documento.enviado)}">
+                    <label for="tipo_documento">Tipo documento : </label>
+                    <select class="form-control" name="tipo_documento" id="tipo_documento" ng-model="nuevo_documento.tipo_documento" ng-options="item as item.tipo_documento for item in nuevo_documento.tipos_documento track by item.tipo_documento_id" ng-required="true">
+                        <option value="">[ Tipo documento ]</option>
+                    </select>
+                    <span class="label label-danger" ng-show="formNuevoDocumento.tipo_documento.$error.required && (!formNuevoDocumento.tipo_documento.$pristine || nuevo_documento.enviado)">Seleccione tipo documento.</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group" ng-class="{'has-error' : formNuevoDocumento.numero_documento.$invalid && (!formNuevoDocumento.numero_documento.$pristine || nuevo_documento.enviado)}">
+                    <label for="numero_documento">N° documento : </label>
+                    <input type="text" class="form-control" name="numero_documento" id="numero_documento" placeholder="N° documento" ng-model="nuevo_documento.numero_documento" ng-disabled="!nuevo_documento.tipo_documento || nuevo_documento.tipo_documento.tipo_documento_id == 21" ng-required="nuevo_documento.tipo_documento || !nuevo_documento.tipo_documento.tipo_documento_id == 21">
+                    <span class="label label-danger" ng-show="formNuevoDocumento.numero_documento.$error.required && (!formNuevoDocumento.numero_documento.$pristine || nuevo_documento.enviado)">Ingrese N° documento.</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="hasta">Fecha documento : </label>
+                    <p class="input-group">
+                        <input type="text" class="form-control text-center" readonly uib-datepicker-popup="dd/MM/yyyy" ng-model="nuevo_documento.fecha_documento" is-open="nuevo_documento.fecha_documento_seleccionado" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-danger" ng-click="nuevo_documento.abrir_calendario()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+    	</div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group" ng-class="{'has-error' : formNuevoDocumento.destino.$invalid && (!formNuevoDocumento.destino.$pristine || nuevo_documento.enviado)}">
+                    <label for="destino">Destino : </label>
+                    <select class="form-control" name="destino" id="destino" ng-model="nuevo_documento.destino" ng-options="item as item.seccion for item in nuevo_documento.secciones track by item.seccion_id" ng-required="true">
+                        <option value="">[ Destino ]</option>
+                    </select>
+                    <span class="label label-danger" ng-show="formNuevoDocumento.destino.$error.required && (!formNuevoDocumento.destino.$pristine || nuevo_documento.enviado)">Seleccione destino.</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group" ng-class="{'has-error' : formNuevoDocumento.unidad_origen.$invalid && (!formNuevoDocumento.unidad_origen.$pristine || nuevo_documento.enviado)}">
+                    <label for="unidad_origen">Unidad de origen : </label>
+                    <input type="text" class="form-control" name="unidad_origen" id="unidad_origen" ng-model="nuevo_documento.unidad_origen" placeholder="Ingresar unidad de origen" uib-typeahead="item as item.unidad for item in nuevo_documento.obtener_unidades($viewValue)" typeahead-loading="cargandoUnidades" typeahead-no-results="sinResultados" ng-required="true">
+                    <i ng-show="cargandoUnidades" class="glyphicon glyphicon-refresh"></i>
+                    <div ng-show="sinResultados">
+                      <i class="glyphicon glyphicon-remove"></i> No se encontraron resultados
+                    </div>
+                    <span class="label label-danger" ng-show="formNuevoDocumento.unidad_origen.$error.required && (!formNuevoDocumento.unidad_origen.$pristine || nuevo_documento.enviado)">Seleccione unidad de origen.</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group" ng-class="{'has-error' : formNuevoDocumento.clasificacion.$invalid && (!formNuevoDocumento.clasificacion.$pristine || nuevo_documento.enviado)}">
+                    <label for="clasificacion">Clasificación : </label>
+                    <select class="form-control" name="clasificacion" id="clasificacion" ng-model="nuevo_documento.clasificacion" ng-options="item as item.clasificacion for item in nuevo_documento.clasificaciones track by item.clasificacion_id" ng-required="true">
+                        <option value="">[ Clasificación ]</option>
+                    </select>
+                    <span class="label label-danger" ng-show="formNuevoDocumento.clasificacion.$error.required && (!formNuevoDocumento.clasificacion.$pristine || nuevo_documento.enviado)">Seleccione clasificación.</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group" ng-class="{'has-error' : formNuevoDocumento.asunto.$invalid && (!formNuevoDocumento.asunto.$pristine || nuevo_documento.enviado)}">
+                    <label for="asunto">Asunto : </label>
+                    <textarea class="form-control" name="asunto" id="asunto" rows="3" ng-model="nuevo_documento.asunto" placeholder="Ingrese asunto" ng-required="true"></textarea>
+                    <span class="label label-danger" ng-show="formNuevoDocumento.asunto.$error.required && (!formNuevoDocumento.asunto.$pristine || nuevo_documento.enviado)">Ingrese asunto.</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group" ng-class="{'has-error' : formNuevoDocumento.adjunto.$invalid && (!formNuevoDocumento.adjunto.$pristine || nuevo_documento.enviado)}">
+                    <label for="adjunto">Adjunto : </label>
+                    <div class="input-group">
+                        <label class="input-group-btn">
+                            <span class="btn btn-primary btn-file">
+                                Seleccionar archivo <input type="file" ngf-select accept="pdf/*" ngf-max-size="20MB" name="adjunto" id="adjunto" ng-model="nuevo_documento.adjunto" ng-required="true">
+                            </span>
+                        </label>
+                        <input type="text" class="form-control" readonly ng-value="nuevo_documento.adjunto ? nuevo_documento.adjunto.name : 'No se ha seleccionado ningún archivo'">
+                    </div>
+                    <p class="help-block">Adjuntar archivo de sustento</p>
+                    <span class="label label-danger" ng-show="formNuevoDocumento.adjunto.$error.required && (!formNuevoDocumento.adjunto.$pristine || nuevo_documento.enviado)">Seleccione un archivo adjunto para continuar.</span>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="nuevo_documento.progreso">
+            <div class="col-md-12">
+                <label for="progreso">Progreso de carga : </label>
+                <uib-progressbar class="progress-striped active" value="nuevo_documento.valor" type="warning">{{nuevo_documento.progreso}}</uib-progressbar>
+            </div>
+        </div>
+	</form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger" type="button" ng-click="nuevo_documento.cerrar()"><i class="glyphicon glyphicon-ban-circle"></i>&nbsp;&nbsp;Cerrar</button>
+    <button type="button" class="btn btn-primary" ng-click="nuevo_documento.enviado = true; formNuevoDocumento.$valid && nuevo_documento.guardar_documento(nuevo_documento.adjunto)"><i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;&nbsp;Guardar documento</button>
+</div>

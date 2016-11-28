@@ -1,0 +1,66 @@
+<div class="modal-header">
+    <h3 class="modal-title"><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;Estado -> {{ver_estado.documento.documento_id}}</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="glyphicon glyphicon-list-alt"></i>&nbsp;Estados
+                </div>
+                <div class="panel-body">
+                    <ul class="chat">
+                        <li class="left clearfix">
+                            <span class="chat-img pull-left">
+                                <div class="avatar" style="background-color: #5cb85c"><i class="fa fa-file-text"></i></div>
+                            </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">Estado : </strong>
+                                    <small class="pull-right text-muted">
+                                        <i class="fa fa-clock-o fa-fw"></i> {{ver_estado.documento.fecha_registro | date:'dd/MM/yyyy'}}
+                                    </small>
+                                </div>
+                                <p>PENDIENTE</p>
+                            </div>
+                        </li>
+                        <li class="left clearfix" ng-if="ver_estado.documento.fecha_decreto != null">
+                            <span class="chat-img pull-left">
+                                <div class="avatar" style="background-color: #f0ad4e"><i class="fa fa-eye"></i></div>
+                            </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">Estado : </strong>
+                                    <small class="pull-right text-muted">
+                                        <i class="fa fa-clock-o fa-fw"></i> {{ver_estado.documento.fecha_decreto | date:'dd/MM/yyyy'}}
+                                    </small>
+                                </div>
+                                <p>DECRETADO</p>
+                            </div>
+                        </li>
+                        <li class="left clearfix" ng-if="ver_estado.documento.fecha_disposicion != null">
+                            <span class="chat-img pull-left">
+                                <div class="avatar" style="background-color: #337ab7"><i class="fa fa-check"></i></div>
+                            </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">Estado : </strong>
+                                    <small class="pull-right text-muted">
+                                        <i class="fa fa-clock-o fa-fw"></i> {{ver_estado.documento.fecha_disposicion | date:'dd/MM/yyyy'}}
+                                    </small>
+                                </div>
+                                <p>FINALIZADO</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <h5 class="text-center">Estados registrados</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger" type="button" ng-click="ver_estado.cerrar()"><i class="glyphicon glyphicon-ban-circle"></i>&nbsp;&nbsp;Cerrar</button>
+</div>

@@ -1,0 +1,79 @@
+<div class="panel panel-red">
+    <div class="panel-heading">
+        <i class="glyphicon glyphicon-list"></i>&nbsp;Listado de documentos pendientes
+    </div>
+    <div class="panel-body">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="decreto">Documento decretado a : </label>
+                        <select class="form-control" name="decreto" id="decreto" ng-model="pendientes.decreto" ng-options="item as item.seccion for item in pendientes.secciones track by item.seccion_id">
+                            <option value="">[ Decreto ]</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="busqueda_accion">&nbsp;</label>
+                        <button type="button" class="btn btn-warning btn-block" name="busqueda_accion" id="busqueda_accion" ng-disabled="!pendientes.decreto" ng-click="pendientes.obtener_documentos(pendientes.decreto.seccion_id)">Búsqueda&nbsp;<i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <caption>Listado de documentos pendientes</caption>
+                        <thead>
+                            <tr>
+                                <th class="text-center">Registro</th>
+                                <th class="text-center">Documento</th>
+                                <th class="text-center">Número</th>
+                                <th class="text-center">Fecha</th>
+                                <th class="text-center">Destino</th>
+                                <th class="text-center">Asunto</th>
+                                <th class="text-center">Clasificación</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-if="pendientes.total_documentos > 0">
+                            <tr ng-repeat="documento in pendientes.documentos">
+                                <td class="text-center">{{documento.documento_id}}</td>
+                                <td class="text-center">{{documento.tipo_documento}}</td>
+                                <td class="text-center">{{documento.documento_numero}}</td>
+                                <td class="text-center">{{documento.documento_fecha | date:'dd/MM/yyyy'}}</td>
+                                <td class="text-center">{{documento.seccion}}</td>
+                                <td>{{documento.asunto | uppercase}}</td>
+                                <td class="text-center">{{documento.clasificacion}}</td>
+                                <td class="text-center">
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="row_actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            <i class="glyphicon glyphicon-pencil"></i>&nbsp;Registro
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="row_actions">
+                                            <li><a ng-click="pendientes.ver_estado(documento)"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;&nbsp;Visualizar</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody ng-if="pendientes.total_documentos == 0">
+                            <tr>
+                                <td class="text-center" colspan="8">No se encontraron documentos registrados</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row" ng-if="pendientes.total_documentos > 0">
+                <div class="col-md-12 text-center">
+                    <ul uib-pagination total-items="pendientes.total_documentos" ng-model="pendientes.pagina_actual" max-size="pendientes.limite" class="pagination-sm" boundary-links="true" force-ellipses="true" ng-change="pendientes.obtener_documentos(pendientes.decreto.seccion_id)" first-text="Primero" last-text="Último" next-text="Siguiente" previous-text="Anterior"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <h5 class="text-center">Documentos pendientes</h5>
+    </div>
+</div>

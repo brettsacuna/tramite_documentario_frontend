@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h3 class="modal-title"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Disposición final</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="tipo_documento">Tipo documento : </label>
+                <select class="form-control" name="tipo_documento" id="tipo_documento" ng-model="disposicion_final.tipo_documento" ng-options="item as item.tipo_documento for item in disposicion_final.tipos_documento track by item.tipo_documento_id">
+                    <option value="">[ Tipo documento ]</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="observacion">Observación : </label>
+                <textarea class="form-control" rows="3" ng-model="disposicion_final.observacion" placeholder="Ingrese observacion"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger" type="button" ng-click="disposicion_final.cerrar()"><i class="glyphicon glyphicon-ban-circle"></i>&nbsp;&nbsp;Cerrar</button>
+    <button type="button" class="btn btn-primary" ng-click="disposicion_final.guardar_disposicion_final()" ng-disabled="!disposicion_final.tipo_documento || !disposicion_final.observacion"><i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;&nbsp;Guardar disposición final</button>
+</div>

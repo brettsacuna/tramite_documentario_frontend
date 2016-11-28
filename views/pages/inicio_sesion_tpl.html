@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="login-panel panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">SISTRAMDOC - Trámite documentario</h3>
+            </div>
+            <div class="panel-body">
+                <div class="message message-{{inicio_sesion.tipo_mensaje ? inicio_sesion.tipo_mensaje : 'info'}} text-center" ng-show="inicio_sesion.mensaje || bandLogOut"><h5><i class="glyphicon glyphicon-{{inicio_sesion.mensaje ? inicio_sesion.icon : 'log-out'}}"></i>&nbsp;&nbsp;{{inicio_sesion.mensaje ? inicio_sesion.mensaje : 'Se cerró la sesión.'}}</h5></div>
+                <form role="form" name="formLogin" ng-submit="inicio_sesion.iniciar_sesion(inicio_sesion.usuario, inicio_sesion.contrasena)" no validate>
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="usuario">Usuario : </label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingrese usuario" ng-model="inicio_sesion.usuario" autofocus />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contrasena">Contraseña : </label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-unlock-alt"></i></div>
+                                <input type="password" class="form-control" id="contrasena" name="contrasena" ng-model="inicio_sesion.contrasena" placeholder="Ingrese contraseña" />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled="!inicio_sesion.usuario || !inicio_sesion.contrasena">Iniciar sesión&nbsp;<i class="fa fa-sign-in"></i></button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

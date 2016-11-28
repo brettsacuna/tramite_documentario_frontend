@@ -1,0 +1,147 @@
+body {
+    font-family: 'Roboto';
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.avatar {
+    z-index: 100;
+    top: 16px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50% 50% 50% 50%;
+    text-align: center;
+    font-size: 1.4em;
+    line-height: 50px;
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.login-panel {
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14),0 1px 10px 0 rgba(0,0,0,0.12),0 2px 4px -1px rgba(0,0,0,0.3);
+}
+
+.userView {
+    position: relative;
+    padding: 32px;
+}
+
+.userView .background {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.userView > a {
+    height: auto;
+    padding: 0;
+    display: block;
+}
+
+.circle {
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14),0 1px 10px 0 rgba(0,0,0,0.12),0 2px 4px -1px rgba(0,0,0,0.3);
+}
+
+.userView .name, .userView .email {
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.white-text {
+    color: #fff !important;
+}
+
+.sidebar ul li a.active {
+    background-color: #1565c0 !important;
+    color: white;
+    font-weight: bold;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.adjunto {
+    position: relative;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14),0 1px 10px 0 rgba(0,0,0,0.12),0 2px 4px -1px rgba(0,0,0,0.3);
+}
+
+.adjunto iframe {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+*{box-sizing: border-box;}
+.pdf-controls { width: 100%; display: block; background: #eee; padding: 1em;}
+.rotate0 {-webkit-transform: rotate(0deg); transform: rotate(0deg); }
+.rotate90 {-webkit-transform: rotate(90deg); transform: rotate(90deg); }
+.rotate180 {-webkit-transform: rotate(180deg); transform: rotate(180deg); }
+.rotate270 {-webkit-transform: rotate(270deg); transform: rotate(270deg); }
+.fixed { position: fixed; top: 0; left: calc(50% - 480px); z-index: 100; width: 100%; padding: 1em; background: rgba(238, 238, 238,.9); width: 960px; }
+/*si necesitas que sea responsive*/
+canvas {
+  width: 100%;
+  height: auto;
+}
+
+.message {
+  margin: 0 auto;
+  margin-bottom: 20px !important;
+  padding: 5px 5px;
+  color: white !important;
+  font-weight: bold;
+  -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+.message-default {
+    background-color: #777;
+}
+.message-primary {
+    background-color: #428bca;
+}
+.message-success {
+    background-color: #5cb85c;
+}
+.message-danger {
+    background-color: #d9534f;
+}
+.message-warning {
+    background-color: #f0ad4e;
+}
+.message-info {
+    background-color: #5bc0de;
+}

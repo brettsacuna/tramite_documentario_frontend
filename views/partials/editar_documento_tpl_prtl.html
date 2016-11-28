@@ -1,0 +1,80 @@
+<div class="modal-header">
+    <h3 class="modal-title"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Editar documento -> {{editar_documento.documento.documento_id}}</h3>
+</div>
+<div class="modal-body">
+	<form name="formEditarDocumento" novalidate>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group" ng-class="{'has-error' : formEditarDocumento.tipo_documento.$invalid && (!formEditarDocumento.tipo_documento.$pristine || editar_documento.enviado)}">
+                    <label for="tipo_documento">Tipo documento : </label>
+                    <select class="form-control" name="tipo_documento" id="tipo_documento" ng-model="editar_documento.tipo_documento" ng-options="item as item.tipo_documento for item in editar_documento.tipos_documento track by item.tipo_documento_id" ng-required="true">
+                        <option value="">[ Tipo documento ]</option>
+                    </select>
+                    <span class="label label-danger" ng-show="formEditarDocumento.tipo_documento.$error.required && (!formEditarDocumento.tipo_documento.$pristine || editar_documento.enviado)">Seleccione tipo documento.</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group" ng-class="{'has-error' : formEditarDocumento.numero_documento.$invalid && (!formEditarDocumento.numero_documento.$pristine || editar_documento.enviado)}">
+                    <label for="numero_documento">N° documento : </label>
+                    <input type="text" class="form-control" name="numero_documento" id="numero_documento" placeholder="N° documento" ng-model="editar_documento.numero_documento" ng-disabled="!editar_documento.tipo_documento || editar_documento.tipo_documento.tipo_documento_id == 21" ng-required="editar_documento.tipo_documento || !editar_documento.tipo_documento.tipo_documento_id == 21">
+                    <span class="label label-danger" ng-show="formEditarDocumento.numero_documento.$error.required && (!formEditarDocumento.numero_documento.$pristine || editar_documento.enviado)">Ingrese N° documento.</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="hasta">Fecha documento : </label>
+                    <p class="input-group">
+                        <input type="text" class="form-control text-center" readonly uib-datepicker-popup="dd/MM/yyyy" ng-model="editar_documento.fecha_documento" is-open="editar_documento.fecha_documento_seleccionado" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-danger" ng-click="editar_documento.abrir_calendario()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+    	</div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group" ng-class="{'has-error' : formEditarDocumento.destino.$invalid && (!formEditarDocumento.destino.$pristine || editar_documento.enviado)}">
+                    <label for="destino">Destino : </label>
+                    <select class="form-control" name="destino" id="destino" ng-model="editar_documento.destino" ng-options="item as item.seccion for item in editar_documento.secciones track by item.seccion_id" ng-required="true">
+                        <option value="">[ Destino ]</option>
+                    </select>
+                    <span class="label label-danger" ng-show="formEditarDocumento.destino.$error.required && (!formEditarDocumento.destino.$pristine || editar_documento.enviado)">Seleccione destino.</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group" ng-class="{'has-error' : formEditarDocumento.unidad_origen.$invalid && (!formEditarDocumento.unidad_origen.$pristine || editar_documento.enviado)}">
+                    <label for="unidad_origen">Unidad de origen : </label>
+                    <input type="text" class="form-control" name="unidad_origen" id="unidad_origen" ng-model="editar_documento.unidad_origen" placeholder="Ingresar unidad de origen" uib-typeahead="item as item.unidad for item in editar_documento.obtener_unidades($viewValue)" typeahead-loading="cargandoUnidades" typeahead-no-results="sinResultados" ng-required="true">
+                    <i ng-show="cargandoUnidades" class="glyphicon glyphicon-refresh"></i>
+                    <div ng-show="sinResultados">
+                      <i class="glyphicon glyphicon-remove"></i> No se encontraron resultados
+                    </div>
+                    <span class="label label-danger" ng-show="formEditarDocumento.unidad_origen.$error.required && (!formEditarDocumento.unidad_origen.$pristine || editar_documento.enviado)">Seleccione unidad de origen.</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group" ng-class="{'has-error' : formEditarDocumento.clasificacion.$invalid && (!formEditarDocumento.clasificacion.$pristine || editar_documento.enviado)}">
+                    <label for="clasificacion">Clasificación : </label>
+                    <select class="form-control" name="clasificacion" id="clasificacion" ng-model="editar_documento.clasificacion" ng-options="item as item.clasificacion for item in editar_documento.clasificaciones track by item.clasificacion_id" ng-required="true">
+                        <option value="">[ Clasificación ]</option>
+                    </select>
+                    <span class="label label-danger" ng-show="formEditarDocumento.clasificacion.$error.required && (!formEditarDocumento.clasificacion.$pristine || editar_documento.enviado)">Seleccione clasificación.</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group" ng-class="{'has-error' : formEditarDocumento.asunto.$invalid && (!formEditarDocumento.asunto.$pristine || editar_documento.enviado)}">
+                    <label for="asunto">Asunto : </label>
+                    <textarea class="form-control" name="asunto" id="asunto" rows="3" ng-model="editar_documento.asunto" placeholder="Ingrese asunto" ng-required="true"></textarea>
+                    <span class="label label-danger" ng-show="formEditarDocumento.asunto.$error.required && (!formEditarDocumento.asunto.$pristine || editar_documento.enviado)">Ingrese asunto.</span>
+                </div>
+            </div>
+        </div>
+	</form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger" type="button" ng-click="editar_documento.cerrar()"><i class="glyphicon glyphicon-ban-circle"></i>&nbsp;&nbsp;Cerrar</button>
+    <button type="button" class="btn btn-primary" ng-click="editar_documento.enviado = true; formEditarDocumento.$valid && editar_documento.guardar_documento()"><i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;&nbsp;Guardar documento</button>
+</div>

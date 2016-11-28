@@ -1,0 +1,9 @@
+<div class="modal-header">
+    <h4 class="modal-title"><span class="glyphicon glyphicon-check"></span>&nbsp;Mensaje del sistema.</h4>
+</div>
+<div class="modal-body" ng-bind-html="alert.message">
+</div>
+<div class="modal-footer">
+	<button class="btn btn-danger" ng-show="alert.button" ng-click="alert.callback(); alert.success();">{{alert.button}}</button>
+    <button class="btn btn-primary" ng-click="alert.close()">Cerrar</button>
+</div>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="tramiteApp">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title ng-bind="'Trámite Documentario | ' + $state.current.data.title"></title>
+        <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+        <link rel="stylesheet" href="build/css/vendor.min.css">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/roboto.css">
+        <link rel="stylesheet" href="css/app.css">
+    </head>
+    <body ng-cloak>
+        <ui-view></ui-view>
+
+        <!-- /#Load Scripts-->
+        <script src="build/js/vendor.min.js"></script>
+        <script src="build/js/app.js"></script>
+    </body>
+</html>
