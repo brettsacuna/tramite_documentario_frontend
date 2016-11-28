@@ -9,6 +9,7 @@
         .controller('asideCtrl', asideCtrl)
         .controller('inicioSesionCtrl', inicioSesionCtrl)
         .controller('pendientesCtrl', pendientesCtrl)
+        .controller('usuariosCtrl', usuariosCtrl)
         .controller('nuevoDocumentoCtrlPrtl', nuevoDocumentoCtrlPrtl)
         .controller('editarDocumentoCtrlPrtl', editarDocumentoCtrlPrtl)
         .controller('visualizarAdjuntoCtrlPrtl', visualizarAdjuntoCtrlPrtl)
@@ -16,6 +17,7 @@
         .controller('disposicionFinalCtrlPrtl', disposicionFinalCtrlPrtl)
         .controller('verEstadoCtrlPrtl', verEstadoCtrlPrtl)
         .controller('cambiarAdjuntoCtrlPrtl', cambiarAdjuntoCtrlPrtl)
+        .controller('nuevoUsuarioCtrlPrtl', nuevoUsuarioCtrlPrtl)
         .controller('messageCtrlPrtl', messageCtrlPrtl);
 
     function panelCtrl ($uibModal, documentoFct, $filter, messageFct) {
@@ -317,6 +319,51 @@
 				console.log('Modal dismissed at: ' + new Date());
 			});
         };
+    }
+
+    function usuariosCtrl (usuarioFct, $uibModal, messageFct) {
+        var usuarios = this;
+
+        usuarios.usuarios = [];
+
+        usuarios.nuevo_usuario = function () {
+            var modalNuevoUsuario = $uibModal.open({
+				templateUrl: 'views/partials/nuevo_usuario_tpl_prtl.html',
+				controller: 'nuevoUsuarioCtrlPrtl as nuevo_usuario',
+				size: 'sm'
+			});
+
+			modalNuevoUsuario.result.then(function (response) {
+				if (response) {
+				    usuarios.obtener_usuarios();
+				}
+			}, function () {
+				console.log('Modal dismissed at: ' + new Date());
+			});
+        };
+
+        usuarios.eliminar_usuario = function (usuario) {
+            usuarioFct.deleteUsuario(usuario.usuario_id).then(function (response) {
+                if (response.estado == 1) {
+                    messageFct.message("Se eliminó correctamente el usuario");
+                    usuarios.obtener_usuarios();
+                } else {
+                    messageFct.message("Ocurrió un error al intentar eliminar el usuario");
+                }
+            }).catch(function (reason) {
+                console.log(reason);
+            });
+        };
+
+        usuarios.obtener_usuarios = function () {
+            usuarioFct.getUsuarios().then(function (response) {
+                usuarios.usuarios = response;
+            }).catch(function (reason) {
+                console.log(reason);
+            });
+        };
+
+        usuarios.obtener_usuarios();
     }
 
     function nuevoDocumentoCtrlPrtl ($uibModalInstance, documentoFct, messageFct, $filter, Upload) {
@@ -745,6 +792,35 @@
 
                 cambiar_adjunto.progreso = 'Subiendo : ' + progreso_carga + '% ';
                 cambiar_adjunto.valor = progreso_carga;
+            });
+        };
+    }
+
+    function nuevoUsuarioCtrlPrtl ($uibModalInstance, usuarioFct, messageFct) {
+        var nuevo_usuario = this;
+
+        nuevo_usuario.cerrar = function () {
+            $uibModalInstance.dismiss();
+        };
+
+        nuevo_usuario.guardar_usuario = function () {
+            var data = $.param({
+                usuario : nuevo_usuario.usuario,
+                contrasena : nuevo_usuario.contrasena,
+                estado : 1,
+                tipo_usuario : 1
+            });
+
+            usuarioFct.saveUsuario(data).then(function (response) {
+                if (response.estado == 1) {
+                    messageFct.message("Se guardó correctamente el usuario");
+
+                    $uibModalInstance.close(true);
+                } else {
+                    messageFct.message("Ocurrió un error al intentar guardar el usuario");
+                }
+            }).catch(function (reason) {
+                console.log(reason);
             });
         };
     }

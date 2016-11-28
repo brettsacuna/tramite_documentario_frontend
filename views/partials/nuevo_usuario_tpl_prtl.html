@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h3 class="modal-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Nuevo usuario</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="usuario">Usuario : </label>
+                <input type="text" class="form-control" name="usuario" id="usuario" ng-model="nuevo_usuario.usuario" placeholder="Ingrese usuario" autofocus>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="contrasena">Contraseña : </label>
+                <input type="password" class="form-control" name="contrasena" id="contrasena" ng-model="nuevo_usuario.contrasena" placeholder="Ingrese contraseña">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger" type="button" ng-click="nuevo_usuario.cerrar()"><i class="glyphicon glyphicon-ban-circle"></i>&nbsp;&nbsp;Cerrar</button>
+    <button type="button" class="btn btn-primary" ng-click="nuevo_usuario.guardar_usuario()" ng-disabled="!nuevo_usuario.usuario || !nuevo_usuario.contrasena"><i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;&nbsp;Guardar usuario</button>
+</div>

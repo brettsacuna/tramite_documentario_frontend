@@ -196,7 +196,7 @@
         };
     }
 
-    function usuarioFct($window, $http) {
+    function usuarioFct($window, $http, $q) {
         return {
 			estaAutenticado: false,
 			iniciar_sesion : function (username, password) {
@@ -216,7 +216,49 @@
 				}).error(function (error) {
 					return error;
 				});
-			}
+			},
+            getUsuarios : function () {
+                var defered = $q.defer();
+		        var promise = defered.promise;
+
+		        $http.get(api.backend+'/usuario')
+		            .success(function(data) {
+		                defered.resolve(data);
+		            })
+		            .error(function(err) {
+		                defered.reject(err);
+		            });
+
+		        return promise;
+            },
+            saveUsuario : function (usuario) {
+                var defered = $q.defer();
+		        var promise = defered.promise;
+
+		        $http.post(api.backend+'/usuario/nuevo', usuario)
+		            .success(function(data) {
+		                defered.resolve(data);
+		            })
+		            .error(function(err) {
+		                defered.reject(err);
+		            });
+
+		        return promise;
+            },
+            deleteUsuario : function (usuario) {
+                var defered = $q.defer();
+		        var promise = defered.promise;
+
+		        $http.delete(api.backend+'/usuario?usuario='+usuario)
+		            .success(function(data) {
+		                defered.resolve(data);
+		            })
+		            .error(function(err) {
+		                defered.reject(err);
+		            });
+
+		        return promise;
+            }
 		};
     }
 
