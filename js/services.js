@@ -9,7 +9,7 @@
         .factory('usuarioFct', usuarioFct)
         .factory('messageFct', messageFct);
 
-    function documentoFct ($http, $q) {
+    function documentoFct ($http, $q, $window) {
         return {
             getSecciones : function () {
 				var defered = $q.defer();
@@ -113,7 +113,9 @@
 				var defered = $q.defer();
 		        var promise = defered.promise;
 
-		        $http.get(api.backend+'/documento?pagina='+pagina+"&limite="+limite+"&bandera="+bandera+"&desde="+desde+"&hasta="+hasta+"&numero_registro="+numero_registro+"&unidad_origen="+unidad_origen+"&tipo_documento="+tipo_documento+"&estado="+estado+"&destino="+destino)
+                var empleado = JSON.parse($window.sessionStorage.empleado);
+
+		        $http.get(api.backend+'/documento?pagina='+pagina+"&limite="+limite+"&bandera="+bandera+"&desde="+desde+"&hasta="+hasta+"&numero_registro="+numero_registro+"&unidad_origen="+unidad_origen+"&tipo_documento="+tipo_documento+"&estado="+estado+"&destino="+destino+"&tipo_usuario="+empleado.tipo_usuario+"&usuario="+empleado.usuario_id)
 		            .success(function(data) {
 		                defered.resolve(data);
 		            })

@@ -195,7 +195,7 @@
         };
     }
 
-    function asideCtrl ($timeout, usuarioFct, $window, $rootScope) {
+    function asideCtrl ($timeout, usuarioFct, $window, $rootScope, $state) {
         var aside = this;
 
         aside.clock = "Cargando fecha y hora ...";
@@ -366,7 +366,7 @@
         usuarios.obtener_usuarios();
     }
 
-    function nuevoDocumentoCtrlPrtl ($uibModalInstance, documentoFct, messageFct, $filter, Upload) {
+    function nuevoDocumentoCtrlPrtl ($uibModalInstance, documentoFct, messageFct, $filter, Upload, $window) {
         var nuevo_documento = this;
 
         nuevo_documento.fecha_documento = new Date();
@@ -439,6 +439,8 @@
         };
 
         nuevo_documento.cargar_adjunto = function (file) {
+            var empleado = JSON.parse($window.sessionStorage.empleado);
+
             if (angular.isObject(nuevo_documento.unidad_origen)) {
                 var data = {
                     asunto : nuevo_documento.asunto,
@@ -447,7 +449,8 @@
                     documento_numero : nuevo_documento.numero_documento || '000',
                     unidad_id_origen : nuevo_documento.unidad_origen.unidad_id,
                     seccion_id_destino : nuevo_documento.destino.seccion_id,
-                    clasificacion_id : nuevo_documento.clasificacion.clasificacion_id
+                    clasificacion_id : nuevo_documento.clasificacion.clasificacion_id,
+                    usuario_id : empleado.usuario_id
                 };
 
                 Upload.upload({
